@@ -1,9 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
-using UnityEngine;
 
-public class Node
+public abstract class Node
 {
     public enum Status { SUCCESS, RUNNING, FAILURE }
     protected int _currentChild;

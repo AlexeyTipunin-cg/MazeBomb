@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 using static Node;
@@ -19,6 +20,7 @@ public class BotAgent : MonoBehaviour
     {
         _behaviourTree = new BehaviourTree();
 
+        Loop loop = new Loop();
         Sequence route = new Sequence();
         for (int i = 0; i < _route.Length; i++)
         {
@@ -27,7 +29,18 @@ public class BotAgent : MonoBehaviour
             route.AddChild(go);
         }
 
-        _behaviourTree.AddChild(route);
+        loop.AddChild(route);
+
+        Sequence reverseRoute = new Sequence();
+        for (int i = _route.Length - 1; i >= 0; i--)
+        {
+            var pos = _route[i].position;
+            Leaf go = new Leaf(() => GoToNextPoint(pos));
+            reverseRoute.AddChild(go);
+        }
+
+        loop.AddChild(reverseRoute);
+        _behaviourTree.AddChild(loop);
 
         _waitForSeconds = new WaitForSeconds(0.5f);
         StartCoroutine(Behave());
