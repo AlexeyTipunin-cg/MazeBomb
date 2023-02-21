@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class BombController : MonoBehaviour
 {
@@ -9,6 +8,7 @@ public class BombController : MonoBehaviour
     [SerializeField] private Bomb _bombPrefab;
     [SerializeField] private Transform _parent;
     [SerializeField] private LayerMask _floorMask;
+    [SerializeField] private LayerMask _wallsMask;
 
     private Camera _camera;
 
@@ -29,14 +29,20 @@ public class BombController : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, _floorMask))
         {
             var pos = hit.point + new Vector3(0, 5, 0);
-            Bomb bomb = Instantiate(_bombPrefab, pos, Quaternion.identity, _parent);
-            bomb.onCollision += Kill;
+            CreateBomb(pos);
         }
     }
 
-    private void Kill(Vector3 pos, float radius)
+    private void CreateBomb(Vector3 pos)
+    {
+        Bomb bomb = Instantiate(_bombPrefab, pos, Quaternion.identity, _parent);
+        bomb.onCollision += BombBurst;
+    }
+
+    private void BombBurst(Vector3 pos, float radius, float damage)
     {
         var _bots = _botsController.GetBots();
+        List<Bot> destroyedBots = new List<Bot>();
 
         for (int i = 0; i < _bots.Length; i++)
         {
@@ -46,16 +52,19 @@ public class BombController : MonoBehaviour
             {
                 Vector3 direction = bot.transform.position - pos;
                 Ray ray = new Ray(pos, direction);
-                if (Physics.Raycast(ray, out RaycastHit hit, radius))
+                if (Physics.Raycast(ray, out RaycastHit hit, distance, _wallsMask))
                 {
-                    if (hit.transform.gameObject.TryGetComponent(out Bot hitBot))
-                    {
-                        Destroy(hitBot.gameObject);
-                    }
-
+                    continue;
                 }
+                bot.MakeDamage(damage);
+
 
             }
+        }
+
+        foreach (var item in destroyedBots)
+        {
+            Destroy(item.gameObject);
         }
     }
 }

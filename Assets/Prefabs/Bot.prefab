@@ -88,9 +88,9 @@ GameObject:
   - component: {fileID: 2660355930348379467}
   - component: {fileID: 2660355930348379460}
   - component: {fileID: 2660355930348379461}
-  - component: {fileID: 2660355930348379462}
   - component: {fileID: 5989107491891701018}
-  - component: {fileID: 1140613706}
+  - component: {fileID: 6512034334894823321}
+  - component: {fileID: 1612237574}
   m_Layer: 0
   m_Name: Bot
   m_TagString: Untagged
@@ -178,19 +178,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2660355930348379462
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2660355930348379456}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 660b510529edf214d9f0ad5ec3d16154, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _totalHealth: 0
 --- !u!195 &5989107491891701018
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -213,7 +200,7 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &1140613706
+--- !u!114 &6512034334894823321
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -222,12 +209,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 2660355930348379456}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b207babc5860e814e898ce0d8797d854, type: 3}
+  m_Script: {fileID: 11500000, guid: 9c5876874ad289e4282a7ebadcca36aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 10
+--- !u!114 &1612237574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2660355930348379456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0453cf41b589384cb53fb32d361e343, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _agent: {fileID: 5989107491891701018}
   _distance: 2
   _route:
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -243,6 +245,7 @@ GameObject:
   - component: {fileID: 7304847099781613335}
   - component: {fileID: 2944203287357383988}
   - component: {fileID: 6250917721435167751}
+  - component: {fileID: 960945479694492071}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -328,6 +331,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35c10c0b6187b1d44b74e2b676d50e64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &960945479694492071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3363507269944643201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e45f471cfa476d348bd77cd2c1520f55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bot: {fileID: 6512034334894823321}
+  _healthBarImage: {fileID: 8981778737055560566}
 --- !u!1 &4663449981416212878
 GameObject:
   m_ObjectHideFlags: 0
@@ -401,6 +418,6 @@ MonoBehaviour:
   m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
-  m_FillOrigin: 1
+  m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
