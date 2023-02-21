@@ -5,14 +5,14 @@ using UnityEngine;
 public class Bomb : MonoBehaviour
 {
     [SerializeField] private float _radius;
-    void Start()
+
+    private void OnCollisionEnter(Collision collision)
     {
-        
+        Destroy(gameObject);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDrawGizmosSelected()
     {
-        
+        Gizmos.DrawWireSphere(transform.position, _radius);
     }
 }
