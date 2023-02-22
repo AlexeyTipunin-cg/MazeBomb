@@ -2,60 +2,47 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BombController
+namespace Assets.Scripts.Bomb
 {
-    public event Action onBombBurst;
-    private BotsController _botsController;
-    private BombFactory _bombFactory;
-    private Camera _camera;
-    private Layers _layers;
-
-    public BombController(BotsController botsController, BombFactory bombFactory, Camera camera, Layers layers)
+    public class BombController
     {
-        _botsController = botsController;
-        _bombFactory = bombFactory;
-        _camera = camera;
-        _layers = layers;
+        public event Action onBombBurst;
+        private BotsController _botsController;
+        private BombFactory _bombFactory;
+        private GamePhysics _gamePhysics;
 
-        PlayerController.onDropBomb += CreateBomb;
-    }
+        private Dictionary<BombTypes, IBombStrategy> _typesToStrategy = new Dictionary<BombTypes, IBombStrategy>();
 
-    public void CreateBomb(Vector2 clickCoords)
-    {
-        Ray ray = _camera.ScreenPointToRay(clickCoords);
-        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, _layers.floorMask))
+        public BombController(BotsController botsController, BombFactory bombFactory, GamePhysics gamePhysics)
         {
-            var pos = hit.point + new Vector3(0, 5, 0);
-            var bomb = _bombFactory.CreateBomb(pos);
-            bomb.onCollision += BombBurst;
+            _botsController = botsController;
+            _bombFactory = bombFactory;
+            _gamePhysics = gamePhysics;
+
+            PlayerController.onDropBomb += CreateBomb;
         }
-    }
-    private void BombBurst(Vector3 pos, float radius, float damage)
-    {
-        var _bots = _botsController.GetBots();
-        List<Bot> destroyedBots = new List<Bot>();
 
-        for (int i = 0; i < _bots.Length; i++)
+        public void CreateBomb(Vector2 clickCoords)
         {
-            var bot = _bots[i];
-            var distance = Vector3.Distance(pos, bot.transform.position);
-            if (distance <= radius)
+            if (_gamePhysics.RaycastOnFloor(clickCoords, out RaycastHit hit))
             {
-                Vector3 direction = bot.transform.position - pos;
-                Ray ray = new Ray(pos, direction);
-                if (Physics.Raycast(ray, out RaycastHit hit, distance, _layers.wallMask))
-                {
-                    continue;
-                }
-                bot.MakeDamage(damage);
+                var pos = hit.point + new Vector3(0, 5, 0);
+                var bomb = _bombFactory.CreateBomb(pos);
+                bomb.onCollision += BombBurst;
             }
         }
+        private void BombBurst(BombTypes bombType, Vector3 pos)
+        {
+            var _bots = _botsController.GetBots();
+            List<Bot> destroyedBots = new List<Bot>();
 
-        onBombBurst.Invoke();
+            for (int i = 0; i < _bots.Length; i++)
+            {
+                var strategy = BombTypesMap.bombTypesMap[bombType];
+                strategy.FindDamagedBots(_bots, pos, _gamePhysics);
+            }
 
-        //foreach (var item in destroyedBots)
-        //{
-        //    Destroy(item.gameObject);
-        //}
+            onBombBurst.Invoke();
+        }
     }
 }

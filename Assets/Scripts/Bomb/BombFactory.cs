@@ -1,13 +1,16 @@
 using UnityEngine;
 
-public class BombFactory : MonoBehaviour
+namespace Assets.Scripts.Bomb
 {
-    [SerializeField] private Bomb _bombPrefab;
-    [SerializeField] private Transform _bombsContainer;
-
-    public Bomb CreateBomb(Vector3 pos)
+    public class BombFactory : MonoBehaviour
     {
-        Bomb bomb = Instantiate(_bombPrefab, pos, Quaternion.identity, _bombsContainer);
-        return bomb;
+        [SerializeField] private BombView _bombPrefab;
+        [SerializeField] private Transform _bombsContainer;
+
+        public IBombView CreateBomb(Vector3 pos)
+        {
+            BombView bomb = Instantiate(_bombPrefab, pos, Quaternion.identity, _bombsContainer);
+            return bomb;
+        }
     }
 }
