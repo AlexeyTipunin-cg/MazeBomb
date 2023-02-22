@@ -4,6 +4,7 @@ using UnityEngine;
 public class Bomb : MonoBehaviour
 {
     public event Action<Vector3, float, float> onCollision;
+
     [SerializeField] private float _radius;
     [SerializeField] private float _damage;
     private void OnCollisionEnter(Collision collision)

@@ -1,44 +1,35 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BombController : MonoBehaviour
+public class BombController
 {
-    [SerializeField] private BotsController _botsController;
-    [SerializeField] private Bomb _bombPrefab;
-    [SerializeField] private Transform _parent;
-    [SerializeField] private LayerMask _floorMask;
-    [SerializeField] private LayerMask _wallsMask;
-
+    public event Action onBombBurst;
+    private BotsController _botsController;
+    private BombFactory _bombFactory;
     private Camera _camera;
+    private Layers _layers;
 
-    private void Start()
+    public BombController(BotsController botsController, BombFactory bombFactory, Camera camera, Layers layers)
     {
-        _camera = Camera.main;
+        _botsController = botsController;
+        _bombFactory = bombFactory;
+        _camera = camera;
+        _layers = layers;
+
         PlayerController.onDropBomb += CreateBomb;
-    }
-
-    private void OnDestroy()
-    {
-        PlayerController.onDropBomb -= CreateBomb;
     }
 
     public void CreateBomb(Vector2 clickCoords)
     {
         Ray ray = _camera.ScreenPointToRay(clickCoords);
-        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, _floorMask))
+        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, _layers.floorMask))
         {
             var pos = hit.point + new Vector3(0, 5, 0);
-            CreateBomb(pos);
+            var bomb = _bombFactory.CreateBomb(pos);
+            bomb.onCollision += BombBurst;
         }
     }
-
-    private void CreateBomb(Vector3 pos)
-    {
-        Bomb bomb = Instantiate(_bombPrefab, pos, Quaternion.identity, _parent);
-        bomb.onCollision += BombBurst;
-    }
-
     private void BombBurst(Vector3 pos, float radius, float damage)
     {
         var _bots = _botsController.GetBots();
@@ -52,19 +43,19 @@ public class BombController : MonoBehaviour
             {
                 Vector3 direction = bot.transform.position - pos;
                 Ray ray = new Ray(pos, direction);
-                if (Physics.Raycast(ray, out RaycastHit hit, distance, _wallsMask))
+                if (Physics.Raycast(ray, out RaycastHit hit, distance, _layers.wallMask))
                 {
                     continue;
                 }
                 bot.MakeDamage(damage);
-
-
             }
         }
 
-        foreach (var item in destroyedBots)
-        {
-            Destroy(item.gameObject);
-        }
+        onBombBurst.Invoke();
+
+        //foreach (var item in destroyedBots)
+        //{
+        //    Destroy(item.gameObject);
+        //}
     }
 }
