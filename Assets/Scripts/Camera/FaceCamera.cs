@@ -1,18 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class FaceCamera : MonoBehaviour
 {
-    private Transform mainCameraTransform;
-    // Start is called before the first frame update
+    private Transform _mainCameraTransform;
     void Start()
     {
-        mainCameraTransform = Camera.main.transform;
+        _mainCameraTransform = Camera.main.transform;
     }
 
-    private void LateUpdate()
+    private void Update()
     {
-        transform.LookAt(transform.position + mainCameraTransform.rotation * Vector3.forward, mainCameraTransform.rotation * Vector3.up);
+        transform.LookAt(transform.position + _mainCameraTransform.rotation * Vector3.forward, _mainCameraTransform.rotation * Vector3.up);
     }
 }
