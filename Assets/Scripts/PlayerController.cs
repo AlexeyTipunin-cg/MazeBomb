@@ -9,14 +9,16 @@ public class PlayerController : MonoBehaviour
     public static event Action<Vector2> onDropBomb;
     [SerializeField] private InputActionReference _dropBomb;
 
-    void Start()
+    private void OnEnable()
     {
+        _dropBomb.action.Enable();
         _dropBomb.action.performed += OnDropBomb;
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         _dropBomb.action.performed -= OnDropBomb;
+        _dropBomb.action.Disable();
     }
 
     private void OnDropBomb(InputAction.CallbackContext context)

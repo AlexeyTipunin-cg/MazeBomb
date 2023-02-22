@@ -212,7 +212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c5876874ad289e4282a7ebadcca36aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  _healthDisplay: {fileID: 960945479694492071}
 --- !u!114 &1612237574
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -228,6 +228,8 @@ MonoBehaviour:
   _agent: {fileID: 5989107491891701018}
   _distance: 2
   _route:
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -343,7 +345,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e45f471cfa476d348bd77cd2c1520f55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bot: {fileID: 6512034334894823321}
   _healthBarImage: {fileID: 8981778737055560566}
 --- !u!1 &4663449981416212878
 GameObject:

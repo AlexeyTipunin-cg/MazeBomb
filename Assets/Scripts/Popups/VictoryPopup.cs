@@ -12,7 +12,6 @@ namespace Assets.Scripts.Popups
         private void Start()
         {
             _restartButton.onClick.AddListener(OnRestartClick);
-            DontDestroyOnLoad(gameObject);
         }
 
         private void OnDestroy()

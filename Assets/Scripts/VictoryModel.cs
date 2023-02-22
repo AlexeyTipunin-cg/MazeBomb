@@ -12,7 +12,7 @@ public class VictoryModel
 
     public void OnBombBurst()
     {
-        if (_botsController.GetBots().Length <= 0)
+        if (_botsController.bots.Count <= 0)
         {
             onVictory?.Invoke();
         }

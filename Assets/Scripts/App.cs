@@ -12,6 +12,7 @@ public class App : MonoBehaviour
     [SerializeField] private GamePhysics _gamePhysics;
 
     private BombController _bombController;
+    private VictoryModel _victoryModel;
 
     private void Start()
     {
@@ -23,10 +24,10 @@ public class App : MonoBehaviour
         _victoryPopup.gameObject.SetActive(false);
 
         _bombController = new BombController(_botsController, _bombFactory, _gamePhysics);
-        VictoryModel victoryModel = new VictoryModel(_botsController);
+        _victoryModel = new VictoryModel(_botsController);
 
-        _bombController.onBombBurst += victoryModel.OnBombBurst;
-        victoryModel.onVictory += OnVictory;
+        _bombController.onBombBurst += _victoryModel.OnBombBurst;
+        _victoryModel.onVictory += OnVictory;
         _victoryPopup.restartGame += RestartScene;
     }
 
@@ -42,6 +43,11 @@ public class App : MonoBehaviour
 
     private void RestartScene()
     {
+        _bombController.onBombBurst -= _victoryModel.OnBombBurst;
+        _bombController.Dispose();
+        _bombController = null;
+        _victoryModel.onVictory -= OnVictory;
+        _victoryPopup.restartGame -= RestartScene;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

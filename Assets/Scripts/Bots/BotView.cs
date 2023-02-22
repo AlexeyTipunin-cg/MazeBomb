@@ -1,28 +1,20 @@
-using System;
 using UnityEngine;
 
 namespace Assets.Scripts.Bots
 {
     public class BotView : MonoBehaviour
     {
-        public event Action<float, float> onHealthChanged;
-        [SerializeField] private int maxHealth;
-        private float _health;
+        [SerializeField] private BotHealthDisplay _healthDisplay;
 
-        private void Start()
+        public BotHealthDisplay healthDisplay => _healthDisplay;
+        public void OnKilled()
         {
-            _health = maxHealth;
+            Destroy(gameObject);
         }
 
-        public void MakeDamage(float damage)
+        public void OnHealthChanged(float currentHealth, float maxHealth)
         {
-            _health -= damage;
-            if (_health <= 0)
-            {
-                Destroy(gameObject);
-                return;
-            }
-            onHealthChanged?.Invoke(_health, maxHealth);
+            _healthDisplay.DisplayHealth(currentHealth, maxHealth);
         }
     }
 }

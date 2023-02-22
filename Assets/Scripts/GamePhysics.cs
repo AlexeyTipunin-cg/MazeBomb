@@ -1,7 +1,5 @@
 ﻿
 using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEngine.UIElements;
 
 public class GamePhysics : MonoBehaviour
 {

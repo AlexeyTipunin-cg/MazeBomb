@@ -8,25 +8,31 @@ namespace Assets.Scripts.Bomb
     {
         private int _radius = 4;
         private int _damage = 2;
-        public List<BotView> FindDamagedBots(BotView[] bots, Vector3 explosionPos, GamePhysics physics)
+        public List<BotView> FindDamagedBots(Dictionary<BotModel, BotView> bot, Vector3 explosionPos, GamePhysics physics)
         {
-            List<BotView> damagedBots = new List<BotView>();
+            List<BotModel> damagedBots = new List<BotModel>();
 
-            for (int i = 0; i < bots.Length; i++)
+            foreach (var botPair in bot)
             {
-                var bot = bots[i];
-                var distance = Vector3.Distance(explosionPos, bot.transform.position);
+                var botPos = botPair.Value.transform.position;
+                var distance = Vector3.Distance(explosionPos, botPos);
                 if (distance <= _radius)
                 {
-                    if (physics.RaycastOnWalls(bot.transform.position, explosionPos, _radius))
+                    if (physics.RaycastOnWalls(botPos, explosionPos, _radius))
                     {
                         continue;
                     }
-                    bot.MakeDamage(_damage);
+                    damagedBots.Add(botPair.Key);
                 }
             }
 
-            return damagedBots;
+            foreach (var botModel in damagedBots)
+            {
+                botModel.MakeDamage(_damage);
+            }
+
+
+            return null;
         }
     }
 
