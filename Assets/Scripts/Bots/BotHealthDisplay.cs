@@ -1,12 +1,11 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace Assets.Scripts.Bots
 {
     public class BotHealthDisplay : MonoBehaviour
     {
-        [SerializeField] private Bot _bot;
+        [SerializeField] private BotView _bot;
         [SerializeField] private Image _healthBarImage;
 
         private void Start()

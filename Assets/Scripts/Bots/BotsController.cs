@@ -1,12 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class BotsController : MonoBehaviour
+namespace Assets.Scripts.Bots
 {
-    public Bot[] GetBots()
+    public class BotsController : MonoBehaviour
     {
-       return GetComponentsInChildren<Bot>();
+        public BotView[] GetBots()
+        {
+            return GetComponentsInChildren<BotView>();
+        }
     }
 }

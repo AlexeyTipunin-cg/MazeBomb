@@ -10,9 +10,6 @@ namespace Assets.Scripts.Bomb
         private BotsController _botsController;
         private BombFactory _bombFactory;
         private GamePhysics _gamePhysics;
-
-        private Dictionary<BombTypes, IBombStrategy> _typesToStrategy = new Dictionary<BombTypes, IBombStrategy>();
-
         public BombController(BotsController botsController, BombFactory bombFactory, GamePhysics gamePhysics)
         {
             _botsController = botsController;
@@ -34,7 +31,7 @@ namespace Assets.Scripts.Bomb
         private void BombBurst(BombTypes bombType, Vector3 pos)
         {
             var _bots = _botsController.GetBots();
-            List<Bot> destroyedBots = new List<Bot>();
+            List<BotView> destroyedBots = new List<BotView>();
 
             for (int i = 0; i < _bots.Length; i++)
             {

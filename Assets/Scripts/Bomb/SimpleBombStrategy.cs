@@ -7,9 +7,9 @@ namespace Assets.Scripts.Bomb
     {
         private int _radius = 4;
         private int _damage = 2;
-        public List<Bot> FindDamagedBots(Bot[] bots, Vector3 explosionPos, GamePhysics physics)
+        public List<BotView> FindDamagedBots(BotView[] bots, Vector3 explosionPos, GamePhysics physics)
         {
-            List<Bot> damagedBots = new List<Bot>();
+            List<BotView> damagedBots = new List<BotView>();
 
             for (int i = 0; i < bots.Length; i++)
             {
