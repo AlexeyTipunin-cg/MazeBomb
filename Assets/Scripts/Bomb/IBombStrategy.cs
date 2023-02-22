@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Assets.Scripts.Bots;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Scripts.Bomb

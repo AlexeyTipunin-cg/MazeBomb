@@ -1,4 +1,5 @@
 using Assets.Scripts.Bomb;
+using Assets.Scripts.Bots;
 using Assets.Scripts.Popups;
 using UnityEngine;
 using UnityEngine.SceneManagement;
