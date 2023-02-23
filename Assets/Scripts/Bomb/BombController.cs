@@ -1,4 +1,5 @@
 using Assets.Scripts.Bots;
+using Assets.Scripts.Input;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,11 +24,6 @@ namespace Assets.Scripts.Bomb
             _playerController.onDropBomb += CreateBomb;
         }
 
-        public void Dispose()
-        {
-            _playerController.onDropBomb -= CreateBomb;
-        }
-
         public void CreateBomb(Vector2 clickCoords)
         {
             if (_gamePhysics.RaycastOnFloor(clickCoords, out RaycastHit hit))
@@ -39,12 +35,10 @@ namespace Assets.Scripts.Bomb
         }
         private void BombBurst(BombTypes bombType, Vector3 pos)
         {
-            var _bots = _botsController.bots;
-            List<BotView> destroyedBots = new List<BotView>();
+            var _bots = _botsController.GetModelsToPos();
 
             var strategy = BombTypesMap.bombTypesMap[bombType];
             strategy.FindDamagedBots(_bots, pos, _gamePhysics);
-
 
             onBombBurst?.Invoke();
         }

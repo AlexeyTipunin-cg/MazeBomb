@@ -1,5 +1,7 @@
 using Assets.Scripts.Bomb;
 using Assets.Scripts.Bots;
+using Assets.Scripts.GameModels;
+using Assets.Scripts.Input;
 using Assets.Scripts.Popups;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -8,11 +10,12 @@ public class App : MonoBehaviour
 {
     [SerializeField] private PlayerController _playerController;
     [SerializeField] private VictoryPopup _victoryPopup;
-    [SerializeField] private BotsController _botsController;
+    [SerializeField] private BotsProvider _botProvider;
     [SerializeField] private BombFactory _bombFactory;
     [SerializeField] private GamePhysics _gamePhysics;
 
     private BombController _bombController;
+    private BotsController _botsController;
     private VictoryModel _victoryModel;
 
     private void Start()
@@ -24,8 +27,11 @@ public class App : MonoBehaviour
     {
         _victoryPopup.gameObject.SetActive(false);
 
+        _botsController = new BotsController(_botProvider);
         _bombController = new BombController(_botsController, _bombFactory, _playerController, _gamePhysics);
         _victoryModel = new VictoryModel(_botsController);
+
+        _botsController.Init();
 
         _bombController.onBombBurst += _victoryModel.OnBombBurst;
         _victoryModel.onVictory += OnVictory;

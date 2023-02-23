@@ -6,6 +6,6 @@ namespace Assets.Scripts.Bomb
 {
     public interface IBombStrategy
     {
-        public List<BotView> FindDamagedBots(Dictionary<BotModel, BotView> bot, Vector3 explosionPos, GamePhysics physics);
+        public void FindDamagedBots(Dictionary<BotModel, Vector3> bot, Vector3 explosionPos, GamePhysics physics);
     }
 }

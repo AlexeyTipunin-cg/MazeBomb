@@ -8,13 +8,13 @@ namespace Assets.Scripts.Bomb
     {
         private int _radius = 4;
         private int _damage = 2;
-        public List<BotView> FindDamagedBots(Dictionary<BotModel, BotView> bot, Vector3 explosionPos, GamePhysics physics)
+        public void FindDamagedBots(Dictionary<BotModel, Vector3> bot, Vector3 explosionPos, GamePhysics physics)
         {
             List<BotModel> damagedBots = new List<BotModel>();
 
             foreach (var botPair in bot)
             {
-                var botPos = botPair.Value.transform.position;
+                var botPos = botPair.Value;
                 var distance = Vector3.Distance(explosionPos, botPos);
                 if (distance <= _radius)
                 {
@@ -30,9 +30,6 @@ namespace Assets.Scripts.Bomb
             {
                 botModel.MakeDamage(_damage);
             }
-
-
-            return null;
         }
     }
 

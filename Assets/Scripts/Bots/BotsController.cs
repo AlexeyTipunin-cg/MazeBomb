@@ -4,19 +4,20 @@ using UnityEngine;
 
 namespace Assets.Scripts.Bots
 {
-    public class BotsController : MonoBehaviour
+    public class BotsController
     {
+        private BotsProvider _botsProvider;
         private Dictionary<BotModel, BotView> _botModelToView = new Dictionary<BotModel, BotView>();
-        public Dictionary<BotModel, BotView> bots => _botModelToView;
-
         public bool hasBots => _botModelToView.Count > 0;
-        private BotView[] GetBots()
+
+        public BotsController(BotsProvider provider)
         {
-            return GetComponentsInChildren<BotView>();
+            _botsProvider = provider;
         }
-        private void Start()
+
+        public void Init()
         {
-            var bots = GetBots().ToList();
+            var bots = _botsProvider.GetBots();
             foreach (var bot in bots)
             {
                 BotModel model = new BotModel();
@@ -26,6 +27,11 @@ namespace Assets.Scripts.Bots
             }
         }
 
+        public Dictionary<BotModel, Vector3> GetModelsToPos()
+        {
+            var modelsToPos = _botModelToView.ToDictionary(pair => pair.Key, value => value.Value.transform.position);
+            return modelsToPos;
+        }
         private void OnBotKilled(BotModel model)
         {
             var bot = _botModelToView[model];
