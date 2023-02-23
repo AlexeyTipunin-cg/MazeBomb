@@ -8,21 +8,24 @@ namespace Assets.Scripts.Bomb
     public class BombController
     {
         public event Action onBombBurst;
+
         private BotsController _botsController;
         private BombFactory _bombFactory;
         private GamePhysics _gamePhysics;
-        public BombController(BotsController botsController, BombFactory bombFactory, GamePhysics gamePhysics)
+        private PlayerController _playerController;
+        public BombController(BotsController botsController, BombFactory bombFactory, PlayerController playerController, GamePhysics gamePhysics)
         {
             _botsController = botsController;
             _bombFactory = bombFactory;
             _gamePhysics = gamePhysics;
+            _playerController = playerController;
 
-            PlayerController.onDropBomb += CreateBomb;
+            _playerController.onDropBomb += CreateBomb;
         }
 
         public void Dispose()
         {
-            PlayerController.onDropBomb -= CreateBomb;
+            _playerController.onDropBomb -= CreateBomb;
         }
 
         public void CreateBomb(Vector2 clickCoords)

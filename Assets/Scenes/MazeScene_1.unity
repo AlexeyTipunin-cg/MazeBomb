@@ -167,6 +167,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BotReversed (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 2660355930348379456, guid: 2b38310f9385850488480f2c5d48f025,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2660355930348379463, guid: 2b38310f9385850488480f2c5d48f025,
         type: 3}
       propertyPath: m_RootOrder
@@ -304,6 +309,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BotReversed (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2660355930348379456, guid: 2b38310f9385850488480f2c5d48f025,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2660355930348379463, guid: 2b38310f9385850488480f2c5d48f025,
         type: 3}
@@ -843,6 +853,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BotReversed (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 2660355930348379456, guid: 2b38310f9385850488480f2c5d48f025,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2660355930348379463, guid: 2b38310f9385850488480f2c5d48f025,
         type: 3}
       propertyPath: m_RootOrder
@@ -949,6 +964,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BotReversed
+      objectReference: {fileID: 0}
+    - target: {fileID: 2660355930348379456, guid: 2b38310f9385850488480f2c5d48f025,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2660355930348379463, guid: 2b38310f9385850488480f2c5d48f025,
         type: 3}
@@ -1136,6 +1156,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Bot (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2660355930348379456, guid: 2b38310f9385850488480f2c5d48f025,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2660355930348379463, guid: 2b38310f9385850488480f2c5d48f025,
         type: 3}
@@ -1350,6 +1375,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Bot (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2660355930348379456, guid: 2b38310f9385850488480f2c5d48f025,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2660355930348379463, guid: 2b38310f9385850488480f2c5d48f025,
         type: 3}
@@ -1607,6 +1637,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bot (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 2660355930348379456, guid: 2b38310f9385850488480f2c5d48f025,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2660355930348379463, guid: 2b38310f9385850488480f2c5d48f025,
         type: 3}
       propertyPath: m_RootOrder
@@ -1701,6 +1736,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db26f4a7232c56346b264c2a84133dd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerController: {fileID: 506425770}
   _victoryPopup: {fileID: 1594502687}
   _botsController: {fileID: 531475425}
   _bombFactory: {fileID: 609509196}
@@ -1795,6 +1831,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Bot (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2660355930348379456, guid: 2b38310f9385850488480f2c5d48f025,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2660355930348379463, guid: 2b38310f9385850488480f2c5d48f025,
         type: 3}
@@ -1964,6 +2005,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Bot (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2660355930348379456, guid: 2b38310f9385850488480f2c5d48f025,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2660355930348379463, guid: 2b38310f9385850488480f2c5d48f025,
         type: 3}
@@ -2140,6 +2186,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BotReversed (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 2660355930348379456, guid: 2b38310f9385850488480f2c5d48f025,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2660355930348379463, guid: 2b38310f9385850488480f2c5d48f025,
         type: 3}
       propertyPath: m_RootOrder
@@ -2246,6 +2297,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BotReversed (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2660355930348379456, guid: 2b38310f9385850488480f2c5d48f025,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2660355930348379463, guid: 2b38310f9385850488480f2c5d48f025,
         type: 3}

@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    public static event Action<Vector2> onDropBomb;
+    public event Action<Vector2> onDropBomb;
     [SerializeField] private InputActionReference _dropBomb;
 
     private void OnEnable()
