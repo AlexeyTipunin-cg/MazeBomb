@@ -14,6 +14,7 @@ public class App : MonoBehaviour
     [SerializeField] private BotsFactory _botFactory;
     [SerializeField] private BombFactory _bombFactory;
     [SerializeField] private GamePhysics _gamePhysics;
+    [SerializeField] private SOAllBombsConfig _soBombsConfig;
 
     private BombController _bombController;
     private BotsController _botsController;
@@ -27,6 +28,8 @@ public class App : MonoBehaviour
     private void Setup()
     {
         _victoryPopup.gameObject.SetActive(false);
+
+        BombsConfig bombsConfig = new BombsConfig(_soBombsConfig);
 
         _botsController = new BotsController(_botProvider, _botFactory);
         _bombController = new BombController(_botsController, _bombFactory, _playerController, _gamePhysics);
@@ -44,6 +47,9 @@ public class App : MonoBehaviour
         _bombController.onBombBurst -= _victoryModel.OnBombBurst;
         _victoryModel.onVictory -= OnVictory;
         _victoryPopup.restartGame -= RestartScene;
+
+        _botsController.Dispose();
+        _bombController.Dispose();
     }
 
     private void OnDestroy()

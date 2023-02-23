@@ -29,7 +29,7 @@ namespace Assets.Scripts.Bomb
             _playerController.onDropBomb -= CreateBomb;
         }
 
-        public void CreateBomb(Vector2 clickCoords)
+        private void CreateBomb(Vector2 clickCoords)
         {
             if (_gamePhysics.RaycastOnFloor(clickCoords, out RaycastHit hit))
             {
@@ -42,7 +42,7 @@ namespace Assets.Scripts.Bomb
         {
             var _bots = _botsController.GetModelsToPos();
 
-            var strategy = BombTypesMap.bombTypesMap[bombType];
+            var strategy = BombsConfig.bombTypesMap[bombType];
             strategy.FindDamagedBots(_bots, pos, _gamePhysics);
 
             onBombBurst?.Invoke();

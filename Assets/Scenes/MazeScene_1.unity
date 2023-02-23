@@ -7701,6 +7701,7 @@ MonoBehaviour:
   _botFactory: {fileID: 531475426}
   _bombFactory: {fileID: 609509196}
   _gamePhysics: {fileID: 1836783594}
+  _soBombsConfig: {fileID: 11400000, guid: cfc8ab49d05202b4cb0b5103422534a8, type: 2}
 --- !u!4 &1836783592
 Transform:
   m_ObjectHideFlags: 0
