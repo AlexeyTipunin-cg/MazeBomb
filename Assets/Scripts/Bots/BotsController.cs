@@ -7,12 +7,14 @@ namespace Assets.Scripts.Bots
     public class BotsController
     {
         private BotsProvider _botsProvider;
+        private BotsFactory _botsFactory;
         private Dictionary<BotModel, BotView> _botModelToView = new Dictionary<BotModel, BotView>();
         public bool hasBots => _botModelToView.Count > 0;
 
-        public BotsController(BotsProvider provider)
+        public BotsController(BotsProvider provider, BotsFactory botsFactory)
         {
             _botsProvider = provider;
+            _botsFactory = botsFactory;
         }
 
         public void Init()
@@ -21,8 +23,11 @@ namespace Assets.Scripts.Bots
             foreach (var bot in bots)
             {
                 BotModel model = new BotModel();
-                model.onHealthChanged += bot.OnHealthChanged;
                 model.onDestroyed += OnBotKilled;
+
+                _botsFactory.SetupBot(model, bot);
+
+                model.onHealthChanged += bot.OnHealthChanged;
                 _botModelToView.Add(model, bot);
             }
         }

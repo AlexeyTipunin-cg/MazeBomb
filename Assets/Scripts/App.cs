@@ -11,6 +11,7 @@ public class App : MonoBehaviour
     [SerializeField] private PlayerController _playerController;
     [SerializeField] private VictoryPopup _victoryPopup;
     [SerializeField] private BotsProvider _botProvider;
+    [SerializeField] private BotsFactory _botFactory;
     [SerializeField] private BombFactory _bombFactory;
     [SerializeField] private GamePhysics _gamePhysics;
 
@@ -27,7 +28,7 @@ public class App : MonoBehaviour
     {
         _victoryPopup.gameObject.SetActive(false);
 
-        _botsController = new BotsController(_botProvider);
+        _botsController = new BotsController(_botProvider, _botFactory);
         _bombController = new BombController(_botsController, _bombFactory, _playerController, _gamePhysics);
         _victoryModel = new VictoryModel(_botsController);
 

@@ -10,6 +10,7 @@ namespace Assets.Scripts.Bots
         public void OnKilled()
         {
             Destroy(gameObject);
+            Destroy(_healthDisplay.gameObject);
         }
 
         public void OnHealthChanged(float currentHealth, float maxHealth)
