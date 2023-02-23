@@ -4,10 +4,10 @@ using UnityEngine.InputSystem;
 public class CameraController : MonoBehaviour
 {
 
-    [SerializeField] private float speed = 20f;
-    [SerializeField] private float screenBorderThickness = 10f;
-    [SerializeField] private Vector2 screenXLimits = Vector2.zero;
-    [SerializeField] private Vector2 screenZLimits = Vector2.zero;
+    [SerializeField] private float _speed = 20f;
+    [SerializeField] private float _screenBorderThickness = 10f;
+    [SerializeField] private Vector2 _screenXLimits = Vector2.zero;
+    [SerializeField] private Vector2 _screenZLimits = Vector2.zero;
 
     private Transform _playerCameraTransform;
 
@@ -17,7 +17,6 @@ public class CameraController : MonoBehaviour
         _playerCameraTransform = Camera.main.transform;
     }
 
-    // Update is called once per frame
     void LateUpdate()
     {
         UpdateCameraPosition();
@@ -32,33 +31,33 @@ public class CameraController : MonoBehaviour
             Vector3 cursorMovement = Vector3.zero;
             Vector2 cursorPosition = Mouse.current.position.ReadValue();
 
-            if (cursorPosition.y >= Screen.height - screenBorderThickness)
+            if (cursorPosition.y >= Screen.height - _screenBorderThickness)
             {
                 cursorMovement.z += 1;
             }
-            else if (cursorPosition.y <= screenBorderThickness)
+            else if (cursorPosition.y <= _screenBorderThickness)
             {
                 cursorMovement.z -= 1;
             }
 
-            if (cursorPosition.x >= Screen.width - screenBorderThickness)
+            if (cursorPosition.x >= Screen.width - _screenBorderThickness)
             {
                 cursorMovement.x += 1;
             }
-            else if (cursorPosition.x <= screenBorderThickness)
+            else if (cursorPosition.x <= _screenBorderThickness)
             {
                 cursorMovement.x -= 1;
             }
 
-            pos += cursorMovement.normalized * speed * Time.deltaTime;
+            pos += cursorMovement.normalized * _speed * Time.deltaTime;
         }
         else
         {
-            pos += new Vector3(prevInput.x, 0f, prevInput.y) * speed * Time.deltaTime;
+            pos += new Vector3(prevInput.x, 0f, prevInput.y) * _speed * Time.deltaTime;
         }
 
-        pos.x = Mathf.Clamp(pos.x, screenXLimits.x, screenXLimits.y);
-        pos.z = Mathf.Clamp(pos.z, screenZLimits.x, screenZLimits.y);
+        pos.x = Mathf.Clamp(pos.x, _screenXLimits.x, _screenXLimits.y);
+        pos.z = Mathf.Clamp(pos.z, _screenZLimits.x, _screenZLimits.y);
 
         _playerCameraTransform.position = pos;
 

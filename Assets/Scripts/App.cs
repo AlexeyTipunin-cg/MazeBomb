@@ -33,15 +33,18 @@ public class App : MonoBehaviour
         _victoryModel = new VictoryModel(_botsController);
 
         _botsController.Init();
+    }
 
-        _bombController.onBombBurst += _victoryModel.OnBombBurst;
-        _victoryModel.onVictory += OnVictory;
-        _victoryPopup.restartGame += RestartScene;
+    private void Dispose()
+    {
+        _bombController.onBombBurst -= _victoryModel.OnBombBurst;
+        _victoryModel.onVictory -= OnVictory;
+        _victoryPopup.restartGame -= RestartScene;
     }
 
     private void OnDestroy()
     {
-        _victoryPopup.restartGame -= RestartScene;
+        Dispose();
     }
 
     private void OnVictory()
@@ -51,6 +54,7 @@ public class App : MonoBehaviour
 
     private void RestartScene()
     {
+        Dispose();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
