@@ -1,17 +1,19 @@
-
-public class Loop : Node
+namespace Assets.Scripts.BehaviourTree
 {
-    public override Status Process()
+    public class Loop : Node
     {
-        var status = _children[_currentChild].Process();
-        if (status == Status.RUNNING) return Status.RUNNING;
-
-        _currentChild++;
-        if (_currentChild >= _children.Count)
+        public override Status Process()
         {
-            _currentChild = 0;
-        }
+            var status = _children[_currentChild].Process();
+            if (status == Status.RUNNING) return Status.RUNNING;
 
-        return Status.RUNNING;
+            _currentChild++;
+            if (_currentChild >= _children.Count)
+            {
+                _currentChild = 0;
+            }
+
+            return Status.RUNNING;
+        }
     }
 }

@@ -1,18 +1,20 @@
 using System.Collections.Generic;
-
-public abstract class Node
+namespace Assets.Scripts.BehaviourTree
 {
-    public enum Status { SUCCESS, RUNNING, FAILURE }
-    protected int _currentChild;
-    protected List<Node> _children = new List<Node>();
-
-    public void AddChild(Node child)
+    public abstract class Node
     {
-        _children.Add(child);
-    }
+        public enum Status { SUCCESS, RUNNING, FAILURE }
+        protected int _currentChild;
+        protected List<Node> _children = new List<Node>();
 
-    public virtual Status Process()
-    {
-        return _children[_currentChild].Process();
+        public void AddChild(Node child)
+        {
+            _children.Add(child);
+        }
+
+        public virtual Status Process()
+        {
+            return _children[_currentChild].Process();
+        }
     }
 }

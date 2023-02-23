@@ -1,17 +1,19 @@
-
 using System;
-
-public class Leaf : Node
+namespace Assets.Scripts.BehaviourTree
 {
-    private Func<Status> _processMethod;
+    public class Leaf : Node
+    {
+        private Func<Status> _processMethod;
 
-    public Leaf(Func<Status> processMethod)
-    {
-        _processMethod = processMethod;
-    }
-    public override Status Process()
-    {
-        var status = _processMethod?.Invoke() ?? Status.FAILURE;
-        return status;
+        public Leaf(Func<Status> processMethod)
+        {
+            _processMethod = processMethod;
+        }
+        public override Status Process()
+        {
+            var status = _processMethod?.Invoke() ?? Status.FAILURE;
+            return status;
+        }
     }
 }
+

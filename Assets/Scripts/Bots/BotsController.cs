@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace Assets.Scripts.Bots
 {
@@ -9,6 +8,8 @@ namespace Assets.Scripts.Bots
     {
         private Dictionary<BotModel, BotView> _botModelToView = new Dictionary<BotModel, BotView>();
         public Dictionary<BotModel, BotView> bots => _botModelToView;
+
+        public bool hasBots => _botModelToView.Count > 0;
         private BotView[] GetBots()
         {
             return GetComponentsInChildren<BotView>();

@@ -1,4 +1,8 @@
-public class BehaviourTree : Node
+namespace Assets.Scripts.BehaviourTree
 {
+    public class BehaviourTree : Node
+    {
 
+    }
 }
+

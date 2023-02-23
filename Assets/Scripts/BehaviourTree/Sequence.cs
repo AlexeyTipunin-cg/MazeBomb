@@ -1,19 +1,21 @@
-
-public class Sequence : Node
+namespace Assets.Scripts.BehaviourTree
 {
-    public override Status Process()
+    public class Sequence : Node
     {
-        var status = base.Process();
-        if (status == Status.RUNNING) return Status.RUNNING;
-
-        _currentChild++;
-        if (_currentChild >= _children.Count)
+        public override Status Process()
         {
-            _currentChild = 0;
-            return Status.SUCCESS;
+            var status = base.Process();
+            if (status == Status.RUNNING) return Status.RUNNING;
+
+            _currentChild++;
+            if (_currentChild >= _children.Count)
+            {
+                _currentChild = 0;
+                return Status.SUCCESS;
+            }
+
+            return Status.RUNNING;
+
         }
-
-        return Status.RUNNING;
-
     }
 }
