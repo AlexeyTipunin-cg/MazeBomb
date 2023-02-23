@@ -17,10 +17,4 @@ public class GamePhysics : MonoBehaviour
         Ray ray = new Ray(explosionPos, direction);
         return Physics.Raycast(ray, out RaycastHit hit, radius, _layers.wallMask);
     }
-
-    public Ray ScreenPointToRay(Vector2 clickCoords)
-    {
-        return _camera.ScreenPointToRay(clickCoords);
-    }
-
 }
