@@ -11,7 +11,7 @@ public class CameraController : MonoBehaviour
 
     private Transform _playerCameraTransform;
 
-    private Vector2 prevInput;
+    private Vector2 _prevInput;
     void Start()
     {
         _playerCameraTransform = Camera.main.transform;
@@ -24,42 +24,38 @@ public class CameraController : MonoBehaviour
 
     private void UpdateCameraPosition()
     {
-        Vector3 pos = _playerCameraTransform.position;
+        Vector3 oldPos = _playerCameraTransform.position;
+        Vector3 pos = oldPos;
 
-        if (prevInput == Vector2.zero)
+        Vector3 cursorMovement = Vector3.zero;
+        Vector2 cursorPosition = Mouse.current.position.ReadValue();
+
+        if (cursorPosition.y >= Screen.height - _screenBorderThickness)
         {
-            Vector3 cursorMovement = Vector3.zero;
-            Vector2 cursorPosition = Mouse.current.position.ReadValue();
-
-            if (cursorPosition.y >= Screen.height - _screenBorderThickness)
-            {
-                cursorMovement.z += 1;
-            }
-            else if (cursorPosition.y <= _screenBorderThickness)
-            {
-                cursorMovement.z -= 1;
-            }
-
-            if (cursorPosition.x >= Screen.width - _screenBorderThickness)
-            {
-                cursorMovement.x += 1;
-            }
-            else if (cursorPosition.x <= _screenBorderThickness)
-            {
-                cursorMovement.x -= 1;
-            }
-
-            pos += cursorMovement.normalized * _speed * Time.deltaTime;
+            cursorMovement.z += 1;
         }
-        else
+        else if (cursorPosition.y <= _screenBorderThickness)
         {
-            pos += new Vector3(prevInput.x, 0f, prevInput.y) * _speed * Time.deltaTime;
+            cursorMovement.z -= 1;
         }
+
+        if (cursorPosition.x >= Screen.width - _screenBorderThickness)
+        {
+            cursorMovement.x += 1;
+        }
+        else if (cursorPosition.x <= _screenBorderThickness)
+        {
+            cursorMovement.x -= 1;
+        }
+
+        pos += cursorMovement.normalized * _speed * Time.deltaTime;
 
         pos.x = Mathf.Clamp(pos.x, _screenXLimits.x, _screenXLimits.y);
         pos.z = Mathf.Clamp(pos.z, _screenZLimits.x, _screenZLimits.y);
 
-        _playerCameraTransform.position = pos;
-
+        if (oldPos != pos)
+        {
+            _playerCameraTransform.position = pos;
+        }
     }
 }

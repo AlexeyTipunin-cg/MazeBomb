@@ -26,10 +26,13 @@ namespace Assets.Scripts.Bots
                 model.onDestroyed += OnBotKilled;
 
                 _botsFactory.SetupBot(model, bot);
-
-                model.onHealthChanged += bot.OnHealthChanged;
                 _botModelToView.Add(model, bot);
             }
+        }
+
+        public void Dispose()
+        {
+            _botModelToView.Clear();
         }
 
         public Dictionary<BotModel, Vector3> GetModelsToPos()

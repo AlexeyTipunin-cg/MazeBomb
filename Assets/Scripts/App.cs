@@ -32,6 +32,10 @@ public class App : MonoBehaviour
         _bombController = new BombController(_botsController, _bombFactory, _playerController, _gamePhysics);
         _victoryModel = new VictoryModel(_botsController);
 
+        _bombController.onBombBurst += _victoryModel.OnBombBurst;
+        _victoryModel.onVictory += OnVictory;
+        _victoryPopup.restartGame += RestartScene;
+
         _botsController.Init();
     }
 

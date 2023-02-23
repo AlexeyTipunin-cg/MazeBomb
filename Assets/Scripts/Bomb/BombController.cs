@@ -24,6 +24,11 @@ namespace Assets.Scripts.Bomb
             _playerController.onDropBomb += CreateBomb;
         }
 
+        public void Dispose()
+        {
+            _playerController.onDropBomb -= CreateBomb;
+        }
+
         public void CreateBomb(Vector2 clickCoords)
         {
             if (_gamePhysics.RaycastOnFloor(clickCoords, out RaycastHit hit))
