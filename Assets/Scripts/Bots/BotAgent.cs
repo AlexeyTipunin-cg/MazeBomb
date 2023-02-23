@@ -2,6 +2,7 @@ using Assets.Scripts.BehaviourTree;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using static Assets.Scripts.BehaviourTree.Node;
 
 public class BotAgent : MonoBehaviour
 {
