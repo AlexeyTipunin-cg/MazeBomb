@@ -1,5 +1,4 @@
 ﻿using System;
-using UnityEngine;
 
 namespace Assets.Scripts.Bots
 {
@@ -7,11 +6,12 @@ namespace Assets.Scripts.Bots
     {
         public event Action<float, float> onHealthChanged;
         public event Action<BotModel> onDestroyed;
-        private int _maxHealth = 10;
+        private int _maxHealth;
         private float _health;
 
-        public BotModel()
+        public BotModel(int maxHealth)
         {
+            _maxHealth = maxHealth;
             _health = _maxHealth;
         }
 

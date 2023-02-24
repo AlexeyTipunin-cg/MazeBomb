@@ -15,6 +15,7 @@ public class App : MonoBehaviour
     [SerializeField] private BombFactory _bombFactory;
     [SerializeField] private GamePhysics _gamePhysics;
     [SerializeField] private SOAllBombsConfig _soBombsConfig;
+    [SerializeField] private SOBotConfig _soBotConfig;
 
     private BombController _bombController;
     private BotsController _botsController;
@@ -31,7 +32,7 @@ public class App : MonoBehaviour
 
         BombsConfig bombsConfig = new BombsConfig(_soBombsConfig);
 
-        _botsController = new BotsController(_botProvider, _botFactory);
+        _botsController = new BotsController(_botProvider, _botFactory, _soBotConfig);
         _bombController = new BombController(_botsController, _bombFactory, _playerController, _gamePhysics);
         _victoryModel = new VictoryModel(_botsController);
 

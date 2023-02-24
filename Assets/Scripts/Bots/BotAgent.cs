@@ -41,7 +41,7 @@ public class BotAgent : MonoBehaviour
         loop.AddChild(reverseRoute);
         _behaviourTree.AddChild(loop);
 
-        _waitForSeconds = new WaitForSeconds(0.5f);
+        _waitForSeconds = new WaitForSeconds(Random.Range(0.5f, 1));
         StartCoroutine(Behave());
     }
 
